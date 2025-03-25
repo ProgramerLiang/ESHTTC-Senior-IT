@@ -11,20 +11,26 @@ lst = ["春暖花开","千军万马","白手起家","风和日丽",
 "一知半解","天高云淡","千变万化","万众一心"]
 score = 5
 print("====中华成语挑战赛====")
-for i in range(8):
+n = int(input("你想通几关? (1~40的整数)"))
+if not 1 <= n <= 40:
+    n = min(40, (max(1, n)))
+    print("输入错误! 您将做", n, "道题!")
+for i in range(n):
     print("当前分数:", score)
     quest = choice(lst)
+    lst.remove(quest)
     invis = int(randint(0, 3))
     ans = quest[invis]
-    rep = str(input(quest[0:invis] + "__" +quest[invis+1:4]))
+    rep = str(input("第 "+str(i+1)+" 关: "+ quest[0:invis] + "__" +quest[invis+1:4]))
     if rep == ans:
         score += 2
-        print("恭喜答对!")
+        print("恭喜答对! 加 2 分!")
     elif rep == '':
         print("跳过当前题目.")
     else:
         score -= 1
         print("答错了! 答案是:", ans)
+        print("扣 1 分!")
     if score < 0:
         break
 if score < 0:
